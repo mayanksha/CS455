@@ -36,7 +36,7 @@ export class DataPreviewComponent implements OnInit {
 			response: 3
 		}];
 	constructor(private http: HttpClient) { }
-	getEndPoint = 'http://localhost:3000/getFeedbacks';
+	getEndPoint = 'http://localhost:9000/getFeedbacks';
 	ngOnInit() {
 		this.http.get(this.getEndPoint)
 			.toPromise()

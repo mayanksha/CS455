@@ -63,6 +63,7 @@ app.get("/getFeedbacks", (req: Request, res: Response, next: NextFunction) => {
 		.then((responses: CustomerFeedbackInstance[]) => {
 			if (responses.length == 0){
 				res.end();
+				return;
 			}
 			let sendObj : {
 				response1_avg: number,
