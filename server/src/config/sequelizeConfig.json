@@ -1,0 +1,10 @@
+{
+  "database": "CS455_A1",
+  "username": "root",
+  "password": "a",
+  "params": {
+    "host": "localhost",
+    "dialect": "mysql",
+    "operatorsAliases": false
+  }
+}

@@ -1,0 +1,143 @@
+<app-topbar></app-topbar>
+<div fxLayout="row" *ngIf="!success" class="body">
+	<mat-card fxFlex="80">
+		<h2>Customer Feedback Form</h2>
+		<form [formGroup]="form">
+			<mat-radio-group formControlName="response1">
+				<mat-label>
+					<h4>
+						Are you satisfied overall with our products? 
+					</h4>
+					<p><i>(1 means extremely dissatisfied, 5 means extremely satisfied)</i></p>
+				</mat-label>
+				<div fxLayout="column" class="evenly-spaced-buttons" >
+					<mat-radio-button class="radio-button" value="1"> 1
+					</mat-radio-button>
+
+					<mat-radio-button class="radio-button" value="2"> 2
+					</mat-radio-button>
+
+					<mat-radio-button class="radio-button" value="3" checked> 3
+					</mat-radio-button>
+
+					<mat-radio-button class="radio-button" value="4"> 4
+					</mat-radio-button>
+
+					<mat-radio-button class="radio-button" value="5"> 5
+					</mat-radio-button>
+				</div>
+			</mat-radio-group>
+			<mat-radio-group formControlName="response2">
+				<mat-label>
+					<h4>
+						Do you find our products easy to use?
+					</h4>
+					<p><i>(1 means they are not usable at all, 5 means they are extremely easy to use)</i></p>
+				</mat-label>
+				<div fxLayout="column" class="evenly-spaced-buttons" >
+					<mat-radio-button class="radio-button" value="1"> 1
+					</mat-radio-button>
+
+					<mat-radio-button class="radio-button" value="2"> 2
+					</mat-radio-button>
+
+					<mat-radio-button class="radio-button" value="3" checked> 3
+					</mat-radio-button>
+
+					<mat-radio-button class="radio-button" value="4"> 4
+					</mat-radio-button>
+
+					<mat-radio-button class="radio-button" value="5"> 5
+					</mat-radio-button>
+				</div>
+			</mat-radio-group>
+			<mat-radio-group formControlName="response3">
+				<mat-label>
+					<h4>
+						How much impact our products have made on your daily routine?
+					</h4>
+					<p><i>(1 means no impact at all, 5 means a huge impact.)</i></p>
+				</mat-label>
+				<div fxLayout="column" class="evenly-spaced-buttons" >
+					<mat-radio-button class="radio-button" value="1"> 1
+					</mat-radio-button>
+
+					<mat-radio-button class="radio-button" value="2"> 2
+					</mat-radio-button>
+
+					<mat-radio-button class="radio-button" value="3" checked> 3
+					</mat-radio-button>
+
+					<mat-radio-button class="radio-button" value="4"> 4
+					</mat-radio-button>
+
+					<mat-radio-button class="radio-button" value="5"> 5
+					</mat-radio-button>
+				</div>
+			</mat-radio-group>
+			<mat-radio-group formControlName="response4">
+				<mat-label>
+					<h4>
+						Would you recommend our products to your friends and family?
+					</h4>
+					<p><i> (1 means strongly advice against our products, 5 means strongly recommend our products.)</i></p>
+				</mat-label>
+				<div fxLayout="column" class="evenly-spaced-buttons" >
+					<mat-radio-button class="radio-button" value="1"> 1
+					</mat-radio-button>
+
+					<mat-radio-button class="radio-button" value="2"> 2
+					</mat-radio-button>
+
+					<mat-radio-button class="radio-button" value="3" checked> 3
+					</mat-radio-button>
+
+					<mat-radio-button class="radio-button" value="4"> 4
+					</mat-radio-button>
+
+					<mat-radio-button class="radio-button" value="5"> 5
+					</mat-radio-button>
+				</div>
+			</mat-radio-group>
+
+			<mat-label>
+				<h4>
+					Any other feedback which you'd like to drop for us?
+				</h4>
+			</mat-label>
+			<mat-form-field style="width: 100%">
+				<mat-label>Your inputs <i>(Max 500 characters.)</i></mat-label>
+				<textarea matInput
+									cdkTextareaAutosize
+									#autosize="cdkTextareaAutosize"
+									cdkAutosizeMinRows="2"
+									cdkAutosizeMaxRows="6"
+									maxlength="500" formControlName="textMessage" id="textMessage"></textarea>
+			</mat-form-field>
+		</form>	
+		<br>
+		<button (click)="onSubmit()" type="submit" mat-raised-button color="primary" [disabled]="!form.valid">Submit</button>
+		<!--    {{ form.value | json }}<br>
+		-{{ form.valid | json }}<br>
+		-<h4>Name change log</h4>-->
+		<div *ngFor="let name of nameChangeLog">{{name}}</div>
+
+	</mat-card>
+</div>
+
+<div *ngIf="success === 1" class="body">
+	<svg  version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130.2 130.2">
+		<circle class="path circle" fill="none" stroke="#73AF55" stroke-width="6" stroke-miterlimit="10" cx="65.1" cy="65.1" r="62.1"/>
+		<polyline class="path check" fill="none" stroke="#73AF55" stroke-width="6" stroke-linecap="round" stroke-miterlimit="10" points="100.2,40.2 51.5,88.8 29.8,67.5 "/>
+	</svg>
+	<p class="success">Thank you for your feedback!</p>
+</div>
+
+<div *ngIf="sucess === 2" class="body">
+	<svg  version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130.2 130.2">
+		<circle class="path circle" fill="none" stroke="#D06079" stroke-width="6" stroke-miterlimit="10" cx="65.1" cy="65.1" r="62.1"/>
+		<line class="path line" fill="none" stroke="#D06079" stroke-width="6" stroke-linecap="round" stroke-miterlimit="10" x1="34.4" y1="37.9" x2="95.8" y2="92.3"/>
+		<line class="path line" fill="none" stroke="#D06079" stroke-width="6" stroke-linecap="round" stroke-miterlimit="10" x1="95.8" y1="38" x2="34.4" y2="92.2"/>
+	</svg>
+	<p class="error">Bummer! Some error ocurred!</p>
+</div>

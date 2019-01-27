@@ -1,0 +1,23 @@
+.topbar {
+
+	width: 100%  !important;
+	z-index: 100;
+	background: #040c1b linear-gradient(  to right,  rgba(255, 255, 255, 0.14),  rgba(255, 255, 255, 0),  rgba(255, 255, 255, 0.14));
+	color: white;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	-webkit-box-shadow: -10px -12px 14px 11px rgb(48, 157, 194);
+	-moz-box-shadow: -10px -12px 14px 11px rgb(48, 157, 194);
+	box-shadow: -10px -12px 14px 11px rgb(48, 157, 194);
+}
+.mat-icon {
+	transform: scale(1.3);
+}
+button {
+	margin: 1vw;
+}
+a {
+	margin: 1vw;
+}
