@@ -16,8 +16,13 @@ sudo apt install mysql-server
 sudo mysql_secure_installation
 
 #------------------Fix npm Permissions (change global dir)------------------
+
+
+curl -sL https://deb.nodesource.com/setup_10.x -o nodesource_setup.sh
+sudo bash nodesource_setup.sh
 sudo apt-get install -y aptitude
 sudo aptitude install -y nodejs npm
+
 mkdir ~/.npm-global
 npm config set prefix '~/.npm-global'
 echo "PATH=~/.npm-global/bin:$PATH" >> ~/.bashrc

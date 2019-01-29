@@ -1,0 +1,1 @@
+You may have to make changes to the database connection credentials in the ./src/config/sequelizeConfig.json file. 
