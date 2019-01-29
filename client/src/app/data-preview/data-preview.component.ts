@@ -41,7 +41,8 @@ export class DataPreviewComponent implements OnInit {
 		this.http.get(this.getEndPoint)
 			.toPromise()
 			.then((response: Feedbacks) => {
-				for (let i = 1; i < this.queries.length; i++) {
+				console.log(response);
+				for (let i = 1; i <= this.queries.length; i++) {
 					this.queries[i - 1].response = response[`response${i}_avg`].toFixed(1);
 				}
 				this.messages = response.textMessages;

@@ -9,7 +9,7 @@ import { CustomerFeedbackAttributes, CustomerFeedbackFactory, CustomerFeedbackIn
 import { createModels } from './models';
 
 const sequelizeConfig = require('./config/sequelizeConfig.json');
-const env_PORT: number = Number.parseInt(process.env.SERVER_PORT || "3000");
+const env_PORT: number = Number.parseInt(process.env.SERVER_PORT || "9000");
 const MAX_TEXT_LEN = 500;
 
 const db = createModels(sequelizeConfig);
@@ -22,9 +22,11 @@ db.sequelize.sync().then((vars) => {
 
 const app: express.Application = express();
 
-app.use('*', cors({
-	origin: "http://localhost:4200" 
-}));
+app.use('*', cors());
+// Selective CORS is disabled
+/*app.use('*', cors({
+ *  origin: "http://localhost:4200" 
+ *}));*/
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended : false }));
 
@@ -61,10 +63,6 @@ app.post("/createFeedback", (req: Request, res: Response, next: NextFunction) =>
 app.get("/getFeedbacks", (req: Request, res: Response, next: NextFunction) => { 
 	db.Feedback.findAll()
 		.then((responses: CustomerFeedbackInstance[]) => {
-			if (responses.length == 0){
-				res.end();
-				return;
-			}
 			let sendObj : {
 				response1_avg: number,
 				response2_avg: number,
@@ -78,6 +76,11 @@ app.get("/getFeedbacks", (req: Request, res: Response, next: NextFunction) => {
 				response4_avg: 0,
 				textMessages: [] 
 			};
+			if (responses.length == 0){
+				res.send(sendObj);
+				res.end();
+				return;
+			}
 			for(let i = 0; i < responses.length; i++){
 				sendObj.response1_avg += responses[i].response1;
 				sendObj.response2_avg += responses[i].response2;
@@ -90,6 +93,7 @@ app.get("/getFeedbacks", (req: Request, res: Response, next: NextFunction) => {
 			sendObj.response2_avg /= responses.length;
 			sendObj.response3_avg /= responses.length;
 			sendObj.response4_avg /= responses.length;
+			console.log(sendObj);
 			res.send(sendObj);
 			res.end();
 			})
@@ -112,7 +116,6 @@ app.use('/*', (err, req, res, next) => {
 		res.end('409 - BAD REQUEST');
 	}
 	else {
-		
 		// Internal Server Error 
 		res.status(500);
 		res.end('500 - INTERNAL SERVER ERROR!');
