@@ -1,0 +1,34 @@
+.radio-button {
+	/*padding-left: calc(10px + 4vw);
+	 *padding-right: calc(10px + 4vw);*/
+	text-align: center;
+  margin: 5px;
+}
+.evenly-spaced-buttons {
+	display: flex;
+	justify-content: space-evenly;
+}
+/deep/ .mat-radio-label {
+	display: flex !important;
+	flex-direction: column !important;
+	justify-content: space-evenly !important;
+}
+/deep/ .mat-radio-label-content {
+	margin: auto !important;
+	padding: 10px 0 0 0 !important;
+}
+h1 {
+	text-align: center;
+}
+h2 {
+	text-align: center;
+}
+.mat-column-response {
+	flex: 0 0 100px;
+}
+.body {
+	margin-top: 12vh !important;
+}
+/deep/ #small {
+	display: inline!important;
+}

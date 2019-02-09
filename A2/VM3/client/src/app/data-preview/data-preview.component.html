@@ -1,0 +1,52 @@
+<app-topbar></app-topbar>
+<div fxLayout="row" fxLayoutAlign="space-evenly" *ngIf="!success" class="body">
+	<mat-card fxFlex="50">
+		<h2>VM Service Ping Interval</h2>
+		<form [formGroup]="form">
+			<mat-form-field style="width: 100%">
+				<mat-label>In Seconds (Min 0.2 seconds, below which causes Ping Flood)<i></i></mat-label>
+				<input matInput formControlName="interval" id="interval">
+			</mat-form-field>
+		</form>
+		<button (click)="onSubmit()" type="submit" mat-raised-button color="primary" [disabled]="!form.valid">Test</button>
+	</mat-card>
+</div>
+
+<div fxLayout="row" fxLayoutAlign="space-evenly" class="body" style="text-align: center">
+	<mat-card fxFlex="40" id="small">
+		<button (click)="stop_vm1_refresher()" mat-raised-button color="primary" [disabled]="!vm1_rand" >Stop Refreshing VM1</button>
+		<h4>Virtual Machine 1 Service</h4>	
+		<div *ngIf="VM_config">
+			IP Addr: {{VM_config[0]?.IP}}
+			<br>
+
+			<p>
+			Service Status: <span *ngIf="vm1_rand" style="color: green">WORKING</span>
+			<span *ngIf="!vm1_rand" style="color: red">NOT WORKING</span>
+			<br>
+			ICMP Ping: <span *ngIf="vm1_ping" style="color: green">WORKING {{vm1_ping}}</span>
+			<span *ngIf="!vm1_ping" style="color: red">NOT WORKING</span>
+			</p> 
+		</div>
+		<br> 
+		Random Value = {{ vm1_rand }}
+	</mat-card>
+	<mat-card fxFlex="40" id="small">
+		<button (click)="stop_vm2_refresher()" mat-raised-button color="primary" [disabled]="!vm2_rand" >Stop Refreshing VM2</button>
+		<h4>Virtual Machine 2 Service</h4>	
+		<div *ngIf="VM_config">
+			IP Addr: {{VM_config[1]?.IP}}
+			<br>
+
+			<p>
+			Service Status: <span *ngIf="vm2_rand" style="color: green">WORKING</span>
+			<span *ngIf="!vm2_rand" style="color: red">NOT WORKING</span>
+			<br>
+			ICMP Ping: <span *ngIf="vm2_ping" style="color: green">WORKING {{vm2_ping}}</span>
+			<span *ngIf="!vm2_ping" style="color: red">NOT WORKING</span>
+			</p> 
+		</div>
+		<br>
+		Random Value = {{ vm2_rand }}
+	</mat-card>
+</div>
