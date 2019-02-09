@@ -1,5 +1,7 @@
 var express = require( 'express' );
 var cors = require( 'cors' );
+var os = require( 'os' );
+var os_utils = require( 'os-utils' );
 const app = express();
 
 app.use(cors());
@@ -13,6 +15,10 @@ function randomGenerator(req, res, next) {
 	res.end();
 }
 app.get('/', randomGenerator);
+/*function getServerStats(req, res, next) {
+ *  console.log(os.cpus())	
+ *}*/
+/*app.get('/monitor', getServerStats);*/
 
 app.use('/*', (err, req, res, next) => {
 	// Assertion errors are wrong user inputs

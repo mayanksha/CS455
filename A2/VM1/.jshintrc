@@ -36,6 +36,6 @@
     "sub": true,
     "strict": false,
     "white": true,
-    "unused": true,
+    "unused": false,
     "esversion": 6
 }
