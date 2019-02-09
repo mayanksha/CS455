@@ -28,7 +28,7 @@ export class DataPreviewComponent implements OnInit {
 	vm2 = 'http://localhost:11001';
 	vm3 = 'http://localhost:11002';
 	form: FormGroup;
-	interval: number;
+	interval = 1;
 	vm1_refresher: any[] = [];
 	vm2_refresher: any[] = [];
 	VM_config: any[] = [];
@@ -64,23 +64,24 @@ export class DataPreviewComponent implements OnInit {
 		this.socketService.onEvent(Event.CONNECT)
 		.subscribe(() => {
 			// Once connected to server, send the interval to start pinging the VMs
-			this.socketService.getPing({
-				interval: this.interval
-			});
 		});
 
 		this.socketService.onEvent(Event.DISCONNECT)
 		.subscribe(() => {
-			this.socketService.quitPing();
+			this.socketService.stopPing();
 			console.log('disconnected');
 			this.vm1_ping = null;
 			this.vm2_ping = null;
 		});
 	}
 	public onSubmit() {
+		this.socketService.stopPing();
 		this.interval = this.form.value.interval;
 		this.startVM1ServicePing();
 		this.startVM2ServicePing();
+		this.socketService.getPing({
+			interval: this.interval
+		});
 	}
 	public stop_vm1_refresher() {
 		this.vm1_rand = null;
@@ -92,13 +93,10 @@ export class DataPreviewComponent implements OnInit {
 	}
 	ngOnInit() {
 		this.form = this.fb.group({
-			interval: ['1', [ Validators.required, Validators.min(0.2) ]],
+			interval: ['', [ Validators.required, Validators.min(0.2) ]],
 		});
 		this.fetchVMIPs();
-		this.onSubmit();
-		setTimeout(() => {
-			this.initIoConnection();
-		}, 1500);
+		this.initIoConnection();
 	}
 	constructor(
 		private http: HttpClient,
@@ -109,10 +107,11 @@ export class DataPreviewComponent implements OnInit {
 		this.http.get(`${this.vm3}/getIP`)
 			.toPromise()
 			.then((data: any) => {
+				console.log(data);
 				this.VM_config = data.config;
 			})
 			.catch((err) => {
-				/*alert('Couldn\'t connect to VM3 to fetch IP Addresses of VM1 and VM2');*/
+				alert('Couldn\'t connect to VM3 to fetch IP Addresses of VM1 and VM2');
 				console.error(err);
 			});
 	}
@@ -124,7 +123,7 @@ export class DataPreviewComponent implements OnInit {
 					timeout(1000),
 					catchError(err => {
 						this.vm1_rand = null;
-						throw err;
+						return Promise.reject(err);
 					})
 				)
 				.subscribe(
@@ -134,7 +133,7 @@ export class DataPreviewComponent implements OnInit {
 					},
 					(error) => {
 						this.vm1_rand = null;
-						console.error(error);
+						/*console.error(error);*/
 					});
 		}, this.interval * 1000);
 		this.vm1_refresher.push(r1);

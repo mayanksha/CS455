@@ -30,10 +30,8 @@ export class SocketService {
 			this.socket.on(event, () => observer.next());
 		});
 	}
-	public quitPing(): Observable<any> {
-		return new Observable<Event>(observer => {
-			this.socket.on('quitPing', () => observer.next());
-		});
+	public stopPing() {
+		this.socket.emit('stopPing');
 	}
 	constructor() { }
 }

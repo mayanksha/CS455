@@ -65,7 +65,7 @@ import { TopbarComponent } from './topbar/topbar.component';
 		MatCheckboxModule,
 		MatSnackBarModule,
 		MatTableModule,
-		MatDividerModule
+		MatDividerModule,
 	],
 	exports: [
 		BrowserModule,
