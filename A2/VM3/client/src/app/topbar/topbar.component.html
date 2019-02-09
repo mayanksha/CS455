@@ -1,22 +1,22 @@
 <mat-toolbar class="topbar" fxLayout="row">
 	<!--<span fxHide.xs  fxFlexOffset="10px" fxFlex="0 0 80px">CS455-A1</span>-->
-	<!--<span fxHide.gt-xs fxFlexOffset="10px" fxFlex="0 0 80px">E-Cell</span>-->
-	<div fxShow.sm="false" fxShow.xs="false" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
-		<a mat-raised-button color="primary" [routerLink]="['/']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-			Submit Feedback
-		</a>
-		<a mat-raised-button color="primary" [routerLink]="['/feedbacks']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
-																																	 [matBadge]="taskCount" matBadgeColor="accent">
-			All feedbacks
-		</a>
-	</div>
+	<span fxFlexOffset="10px" fxFlex="0 0 80px">VM Monitoring Service - CS455_A2</span>
+	<!--<div fxShow.sm="false" fxShow.xs="false" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
+		 -  <a mat-raised-button color="primary" [routerLink]="['/']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+		 -    Submit Feedback
+		 -  </a>
+		 -  <a mat-raised-button color="primary" [routerLink]="['/feedbacks']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+		 -                                                                 [matBadge]="taskCount" matBadgeColor="accent">
+		 -    All feedbacks
+		 -  </a>
+		 -</div>-->
 
 </mat-toolbar>
-<mat-menu #menu="matMenu">
-	<button mat-menu-item [routerLink]="['/']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-		Submit Feedback
-	</button>
-	<button mat-menu-item [routerLink]="['/feedbacks']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-		All feedbacks
-	</button>
-</mat-menu>
+<!--<mat-menu #menu="matMenu">
+	 -  <button mat-menu-item [routerLink]="['/']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+	 -    Submit Feedback
+	 -  </button>
+	 -  <button mat-menu-item [routerLink]="['/feedbacks']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+	 -    All feedbacks
+	 -  </button>
+   -</mat-menu>-->
