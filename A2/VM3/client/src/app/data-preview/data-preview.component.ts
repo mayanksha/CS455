@@ -48,12 +48,10 @@ export class DataPreviewComponent implements OnInit {
 		.subscribe((pingReply: any) => {
 			if (typeof pingReply === 'string') {
 				const curr_time = new Date().getTime();
-				if (curr_time - this.vm1_lastPingTime >= 3000) {
-					this.vm1_rand = null;
+				if (curr_time - this.vm1_lastPingTime >= this.interval * 1000 + 3000) {
 					this.vm1_ping = null;
 				}
-				if (curr_time - this.vm2_lastPingTime >= 3000) {
-					this.vm2_rand = null;
+				if (curr_time - this.vm2_lastPingTime >= this.interval * 1000 + 3000) {
 					this.vm2_ping = null;
 				}
 				if (pingReply.search(this.VM_config[0].IP) > 0) {
@@ -63,7 +61,8 @@ export class DataPreviewComponent implements OnInit {
 						this.vm1_lastPingTime = new Date().getTime();
 					this.vm1_ping = pingReply.replace(/.*time=(.*)/, '$1');
 					}
-				} else {
+				}
+				if (pingReply.search(this.VM_config[1].IP) > 0) {
 					if (pingReply.search('Unreachable') > 0) {
 						this.vm2_ping = null;
 					} else {
