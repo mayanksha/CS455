@@ -39,22 +39,35 @@ export class DataPreviewComponent implements OnInit {
 	vm1_ping: string;
 	vm2_ping: string;
 	ioConnection: any;
+	vm1_lastPingTime: number;
+	vm2_lastPingTime: number;
 	private initIoConnection(): void {
 		this.socketService.initSocket();
 
 		this.ioConnection = this.socketService.onPingEvent()
 		.subscribe((pingReply: any) => {
 			if (typeof pingReply === 'string') {
+				const curr_time = new Date().getTime();
+				if (curr_time - this.vm1_lastPingTime >= 3000) {
+					this.vm1_rand = null;
+					this.vm1_ping = null;
+				}
+				if (curr_time - this.vm2_lastPingTime >= 3000) {
+					this.vm2_rand = null;
+					this.vm2_ping = null;
+				}
 				if (pingReply.search(this.VM_config[0].IP) > 0) {
 					if (pingReply.search('Unreachable') > 0) {
 						this.vm1_ping = null;
 					} else {
+						this.vm1_lastPingTime = new Date().getTime();
 					this.vm1_ping = pingReply.replace(/.*time=(.*)/, '$1');
 					}
 				} else {
 					if (pingReply.search('Unreachable') > 0) {
 						this.vm2_ping = null;
 					} else {
+						this.vm2_lastPingTime = new Date().getTime();
 						this.vm2_ping = pingReply.replace(/.*time=(.*)/, '$1');
 					}
 				}

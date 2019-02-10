@@ -72,15 +72,19 @@ class WebServer {
 		let pingProcess = cp.spawn('ping', 
 			['-i', 
 				this.VM_Config.timeInterval.toString(),
+				'-W',
+				'1',
 				IP
 		]);
 		pingProcess.stdout.on('data', (data) => {
 			let str = data.toString();
-			console.log(str);
+			console.log(`stdout: ${str}`);
 			socket.emit('pingICMP', str);
 		});
 		pingProcess.stderr.on('data', (data) => {
-			console.log(`stderr: ${data}`);
+			let str = data.toString();
+			console.error(`stdout: ${str}`);
+			socket.emit('pingICMP', str);
 		});
 		pingProcess.on('exit', (code, signal) => {
 			console.log(`child process exited with code ${code}, signal = ${signal}`);
