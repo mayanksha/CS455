@@ -24,9 +24,9 @@ enum Event {
 	styleUrls: ['./data-preview.component.css']
 })
 export class DataPreviewComponent implements OnInit {
-	vm1 = 'http://localhost:11000';
-	vm2 = 'http://localhost:11001';
-	vm3 = 'http://localhost:11002';
+	vm1 = 'http://172.20.0.2:9000';
+	vm2 = 'http://172.20.0.3:9000';
+	vm3 = 'http://localhost:9000';
 	form: FormGroup;
 	interval = 1;
 	vm1_refresher: any[] = [];

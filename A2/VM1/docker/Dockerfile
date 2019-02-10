@@ -29,7 +29,7 @@ RUN \
  && sed -i 's/security.ubuntu.com/172.27.16.119/g' /etc/apt/sources.list \
  && apt-get -q update               \
             --assume-yes            \
- && echo -e "\n\tDEPLOYED: \t UPDATES \n" \
+ && echo -e "\n\t Changed mirror to IIK, DEPLOYED: UPDATES \n" \
 \
 ##  Tools Setup                     \
 ##  --------------------------------------------------------------------------------  ## \

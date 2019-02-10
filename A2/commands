@@ -1,0 +1,4 @@
+#Create a new network msharma
+docker network create --subnet=172.20.0.0/16 msharma
+
+docker run --net msharma --ip 172.20.0.2 -p 11000:9000 -d -P --name vm1_c vm1

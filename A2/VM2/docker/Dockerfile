@@ -1,5 +1,5 @@
 FROM ubuntu:16.04
-ARG SERVER_PORT=9001
+ARG SERVER_PORT=9000
 ENV NPM_CONFIG_LOGLEVEL=${NPM_CONFIG_LOGLEVEL:-info}  \
     NODE_VERSION=${NODE_VERSION:-8.12.0}              \
     SVC_USER=${SVC_USER:-node}												\
@@ -29,7 +29,7 @@ RUN \
  && sed -i 's/security.ubuntu.com/172.27.16.119/g' /etc/apt/sources.list \
  && apt-get -q update               \
             --assume-yes            \
- && echo -e "\n\tDEPLOYED: \t UPDATES \n" \
+ && echo -e "\n\tChanged Mirror to IITK, DEPLOYED: UPDATES \n" \
 \
 ##  Tools Setup                     \
 ##  --------------------------------------------------------------------------------  ## \
@@ -69,7 +69,7 @@ RUN APP_NAME=CS455			            \
 ##  Communication
 ##  --------------------------------------------------------------------------------  ##
 WORKDIR /app/CS455/A2/VM2
-EXPOSE 9001
+EXPOSE 9000
 RUN ["pwd"]
 #RUN ["node", "app.js"]
 #RUN ["node", "A2/VM2/app.js"]

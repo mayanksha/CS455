@@ -5,7 +5,7 @@ ENV NPM_CONFIG_LOGLEVEL=${NPM_CONFIG_LOGLEVEL:-info}  \
     SVC_USER=${SVC_USER:-node}												\
     SERVER_PORT=${SERVER_PORT}
 
-ARG SVC_USER="virtual_machine1"
+ARG SVC_USER="virtual_machine3"
 RUN \
 \
 ##  Create the node.js system user \
@@ -29,7 +29,7 @@ RUN \
  && sed -i 's/security.ubuntu.com/172.27.16.119/g' /etc/apt/sources.list \
  && apt-get -q update               \
             --assume-yes            \
- && echo -e "\n\tDEPLOYED: \t UPDATES \n" \
+ && echo -e "\n\tChanged Mirror to IITK, DEPLOYED: UPDATES \n" \
 \
 ##  Tools Setup                     \
 ##  --------------------------------------------------------------------------------  ## \
@@ -56,24 +56,25 @@ RUN \
  && curl -sL https://deb.nodesource.com/setup_8.x | bash - \
  && apt-get install -y nodejs \
  && node -v										\
- && echo -e "\n\n\tDEPLOYED: \t Node.js:$(/usr/local/bin/node -v) for linux-${ARCH} \n\n"                      
+ && echo -e "\n\n\tDEPLOYED: \t Node.js:$(/usr/bin/node -v) for linux-${ARCH} \n\n"                      
 
 WORKDIR /app
 RUN APP_NAME=CS455			            \
  && git clone https://github.com/mayanksha/${APP_NAME}.git \
- && cd ${APP_NAME}/A2/VM1                  \
- && export VM_DIR=$(pwd)										\
- && npm install 										\
- && echo -e "\n\tDEPLOYED: \t VM1 Application \n"
+ && cd ${APP_NAME}/A2/VM3	          \
+ && export VM_DIR=$(pwd)						\
+ && echo 														\
+ && echo -e "\n\tDEPLOYED: \t VM3 Application \n"
 
 ##  Communication
 ##  --------------------------------------------------------------------------------  ##
-WORKDIR /app/CS455/A2/VM1
-EXPOSE 9000
+WORKDIR /app/CS455/A2/VM3
+EXPOSE 4200 
 RUN ["pwd"]
 #RUN ["node", "app.js"]
-#RUN ["node", "A2/VM1/app.js"]
+#RUN ["node", "A2/VM2/app.js"]
 ## Set /usr/bin/node as the Dockerized entry-point Application
 
-WORKDIR /app/CS455/A2/VM1
+WORKDIR /app/CS455/A2/VM3
+RUN ["bash", "./build_script.sh"]
 CMD ["node", "app.js"];
