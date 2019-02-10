@@ -63,7 +63,7 @@ RUN APP_NAME=CS455			            \
  && git clone https://github.com/mayanksha/${APP_NAME}.git \
  && cd ${APP_NAME}/A2/VM3	          \
  && export VM_DIR=$(pwd)						\
- && echo "Foobar"											\
+ && echo "Shooba2r"											\
  && echo -e "\n\tDEPLOYED: \t VM3 Application \n"
 
 ##  Communication
@@ -78,5 +78,5 @@ WORKDIR /app/CS455/A2/VM3
 RUN ["bash", "./build_script.sh"]
 WORKDIR /app/CS455/A2/VM3/client
 RUN apt install -y iputils-ping 
-EXPOSE 4200 
+EXPOSE 4200 9000
 CMD ["ng", "serve", "--host", "0.0.0.0", "--port", "4200"];

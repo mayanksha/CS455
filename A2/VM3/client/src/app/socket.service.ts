@@ -8,7 +8,7 @@ import { environment } from '../environments/environment';
 export class SocketService {
 
 	// Our socket connection
-	ws_url = 'http://localhost:11002';
+	ws_url = 'http://172.20.0.4:9000';
 	private socket;
 	public initSocket(): void {
 		this.socket = socketIo(this.ws_url);
