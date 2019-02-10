@@ -118,20 +118,28 @@ class WebServer {
 process.nextTick(() => {
 	const vm1_name = 'vm1_c';
 	const vm2_name = 'vm2_c';
-	const docker_inspect = exec(`docker inspect ${vm1_name} ${vm2_name}`);
-	docker_inspect.then((data) => {
-		let config = JSON.parse(data.stdout);
-		config = config.map((VM) => {
-			return {
-				Name: VM.Name,
-				IP: VM.NetworkSettings.Networks.bridge.IPAddress
-			};
-		});
-		const expressApp = new WebServer(config);
-	})
-		.catch((err) => {
-			throw err;
-		});
+	const expressApp = new WebServer([{
+		Name: '/vm1_c',
+		IP: '172.20.0.2'
+	},
+		{
+		Name: '/vm2_c',
+		IP: '172.20.0.3'
+		}])
+	/*const docker_inspect = exec(`docker inspect ${vm1_name} ${vm2_name}`);
+	 *docker_inspect.then((data) => {
+	 *  let config = JSON.parse(data.stdout);
+	 *  config = config.map((VM) => {
+	 *    return {
+	 *      Name: VM.Name,
+	 *      IP: VM.NetworkSettings.Networks.bridge.IPAddress
+	 *    };
+	 *  });
+	 *  const expressApp = new WebServer(config);
+	 *})
+	 *  .catch((err) => {
+	 *    throw err;
+	 *  });*/
 });
 
 server.listen(env_PORT, (err) => { 

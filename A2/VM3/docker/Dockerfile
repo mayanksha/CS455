@@ -54,7 +54,7 @@ RUN \
 ##  Node.js Setup                 */\
 ##  --------------------------------------------------------------------------------  ## \
  && curl -sL https://deb.nodesource.com/setup_8.x | bash - \
- && apt-get install -y nodejs \
+ && apt-get install -y nodejs aptitude\
  && node -v										\
  && echo -e "\n\n\tDEPLOYED: \t Node.js:$(/usr/bin/node -v) for linux-${ARCH} \n\n"                      
 
@@ -63,13 +63,12 @@ RUN APP_NAME=CS455			            \
  && git clone https://github.com/mayanksha/${APP_NAME}.git \
  && cd ${APP_NAME}/A2/VM3	          \
  && export VM_DIR=$(pwd)						\
- && echo 														\
+ && echo "Foobar"											\
  && echo -e "\n\tDEPLOYED: \t VM3 Application \n"
 
 ##  Communication
 ##  --------------------------------------------------------------------------------  ##
 WORKDIR /app/CS455/A2/VM3
-EXPOSE 4200 
 RUN ["pwd"]
 #RUN ["node", "app.js"]
 #RUN ["node", "A2/VM2/app.js"]
@@ -77,4 +76,7 @@ RUN ["pwd"]
 
 WORKDIR /app/CS455/A2/VM3
 RUN ["bash", "./build_script.sh"]
-CMD ["node", "app.js"];
+WORKDIR /app/CS455/A2/VM3/client
+RUN apt install -y iputils-ping 
+EXPOSE 4200 
+CMD ["ng", "serve", "--host", "0.0.0.0", "--port", "4200"];
